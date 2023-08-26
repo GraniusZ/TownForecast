@@ -36,7 +36,7 @@ export const Weather: FC = () => {
                         <div className="h-fit w-fit">
                             <div className="w-[100px] h-[100px] sm:w-[150px] sm:h-[150px] lg:w-[200px] lg:h-[200px]">
 
-                                {findIcon(forecast.list[0].weather[0].icon)}
+                                {findIcon(weather.weather[0].icon)}
                             </div>
                         </div>
                     </div>
