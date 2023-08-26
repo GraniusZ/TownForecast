@@ -20,7 +20,7 @@ export const Layout: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
     useEffect(() => {
         dispatch(setSideMenu(false))
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         if (cityData) {
             dispatch(setCity(cityData[0].name));
