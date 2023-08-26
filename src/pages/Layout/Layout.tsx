@@ -5,22 +5,21 @@ import {useAppSelector} from "@hooks/useTypedSelector.ts";
 import {useGetForecastQuery, useGetWeatherQuery} from "@/api/weatherAPI.ts";
 import {useGetCityQuery} from "@/api/geoAPI.ts";
 import {useAppDispatch} from "@hooks/useTypedDispatch.ts";
-import {setCity, setSideMenu} from "@store/slices/WeatherSlice.ts";
+import {setCity} from "@store/slices/WeatherSlice.ts";
 import {Spinner} from "@components/Spinner/Spinner.tsx";
 
 export const Layout: FC = () => {
     const city = useAppSelector(state => state.weather.city)
     const dispatch = useAppDispatch()
-    const {data: weather, isLoading: isLoadingWeather} = useGetWeatherQuery({city: city})
-    const {data: forecast, isLoading: isLoadingForecast} = useGetForecastQuery({city: city})
+    const {data: weather, isLoading: isLoadingWeather} = useGetWeatherQuery({city: city}, {skip: city == ""})
+    const {data: forecast, isLoading: isLoadingForecast} = useGetForecastQuery({city: city}, {skip: city == ""})
+
     const [lat, setLat] = useState<number>()
     const [long, setLong] = useState<number>()
     const [locError, setLocError] = useState(false)
     const {data: cityData} = useGetCityQuery({lat: lat, lon: long}, {skip: !lat || !long})
     const [loading, setLoading] = useState<boolean>(false)
-    useEffect(() => {
-        dispatch(setSideMenu(false))
-    }, [dispatch]);
+
     useEffect(() => {
         if (cityData) {
             dispatch(setCity(cityData[0].name));

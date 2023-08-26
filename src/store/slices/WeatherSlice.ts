@@ -27,13 +27,11 @@ export const weatherSlice = createSlice({
         setCity: (state, action:PayloadAction<string>) => {
             state.city = action.payload;
         },
-        setSideMenu:(state, action:PayloadAction<boolean>) => {
-            state.sideMenu = action.payload;
-        },
+
 
     },
 });
 
-export const {setCity, setSideMenu} = weatherSlice.actions;
+export const {setCity} = weatherSlice.actions;
 
 export const weatherReducer = weatherSlice.reducer;
